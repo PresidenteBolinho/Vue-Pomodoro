@@ -5,6 +5,9 @@ const pomodoro = Vue.createApp({
         const pausaLonga = 15 * 60;
 
         return {
+            eTemaEscuro: false,
+            textoTemaEscuro: "Tema claro",
+
             pomodoroTempo,
             pausaCurta,
             pausaLonga,
@@ -19,6 +22,14 @@ const pomodoro = Vue.createApp({
         }
     },
     methods: {
+        mudarTema() {
+            if (this.eTemaEscuro) {
+                this.textoTemaEscuro = "Tema claro"
+            } else {
+                this.textoTemaEscuro = "Tema escuro"
+            }
+        },
+
         tempoDePomodoro() {
             clearInterval(this.intervalo)
             this.tempoAtual = this.pomodoroTempo
@@ -58,27 +69,28 @@ const pomodoro = Vue.createApp({
                 // Clear interval
                 clearInterval(this.intervalo);
 
-                if (this.contagemPomodoros >= 4){
+                if (this.contagemPomodoros >= 4) {
                     this.tempoAtual = this.pausaLonga
                     this.contagemPomodoros = 0
                 } else {
                     this.tempoAtual = this.pausaCurta
                     this.contagemPomodoros++
                 }
-                    
+
 
                 // Immediately disable button and set state
                 this.textoBotao = "Começar!";
             }
         },
+
         adicionarTarefa() {
-            if(this.novoTextoTarefa != ''){
+            if (this.novoTextoTarefa != '') {
                 this.tarefas.push({
                     id: this.IdTarefa++,
                     title: this.novoTextoTarefa
                 })
                 this.novoTextoTarefa = ''
-            } else 
+            } else
                 alert('O campo não pode estar vazio.')
 
         }
@@ -103,8 +115,10 @@ pomodoro.component('item-tarefa', {
     emits: ['remove'],
     template: `
     <li>
-        {{ title }}
-        <button class="btn btn-danger" @click="$emit('remove')">Remover</button>
+        <span>
+            {{ title }}
+            <button class="btn btn-danger" @click="$emit('remove')">Remover</button>
+        </span>
     </li>
     `
 })

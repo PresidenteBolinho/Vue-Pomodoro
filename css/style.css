@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
+* {
+    
+}
+
+#tema-escuro {
+    background-color: black;
+}
+
+#app {
+    height: 100vh;
+}
+
 label {
     font-family: 'Inter', sans-serif;
 }
