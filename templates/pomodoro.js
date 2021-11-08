@@ -3,6 +3,7 @@ const pomodoro = Vue.createApp({
         const pomodoroTempo = 25 * 60;
         const pausaCurta = 5 * 60;
         const pausaLonga = 15 * 60;
+        const somAlarme = new Audio("../sounds/alarm.mp3");
 
         return {
             eTemaEscuro: false,
@@ -15,6 +16,7 @@ const pomodoro = Vue.createApp({
             textoBotao: "Começar!",
             intervalo: null,
             contagemPomodoros: 0,
+            alarme: somAlarme,
 
             tarefas: [],
             novoTextoTarefa: '',
@@ -77,6 +79,7 @@ const pomodoro = Vue.createApp({
                     this.contagemPomodoros++
                 }
 
+                this.alarme.play()
 
                 // Immediately disable button and set state
                 this.textoBotao = "Começar!";
