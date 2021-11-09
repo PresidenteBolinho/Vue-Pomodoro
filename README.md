@@ -6,9 +6,10 @@ Repositório para hospedagem de uma aplicação Vue de um pomodoro.
 [X] Tema escuro
 [X] Adicionar sinal sonoro
 [] Validação de usuario
-[] Banco de dados com json
+[] Banco de dados com slqlite3
 [] Uma tela de configurações
 [] Colocar google adsense
+[] Hospedar a aplicação
 
 (Leque bem grande para abordar)
 * Estatistica

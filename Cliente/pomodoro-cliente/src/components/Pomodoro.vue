@@ -1,0 +1,174 @@
+<template>
+  <div
+    class="card"
+    :class="[{ 'text-white': eTemaEscuro, 'bg-secondary': eTemaEscuro }]"
+  >
+    <div class="card-header">
+      <div
+        class="btn-toolbar justify-content-center"
+        role="toolbar"
+        aria-label="Toolbar with button groups"
+      >
+        <button
+          type="button"
+          class="btn"
+          :class="eTemaEscuro ? 'btn-outline-light' : 'btn-primary'"
+          @click="tempoDePomodoro()"
+        >
+          Pomodoro
+        </button>
+        <button
+          type="button"
+          class="btn"
+          :class="eTemaEscuro ? 'btn-outline-light' : 'btn-primary'"
+          @click="tempoDePausaCurta()"
+        >
+          Pausa curta
+        </button>
+        <button
+          type="button"
+          class="btn"
+          :class="eTemaEscuro ? 'btn-outline-light' : 'btn-primary'"
+          @click="tempoDePausaLonga()"
+        >
+          Pausa longa
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <label id="relogio" class="row justify-content-center">{{
+        relogio
+      }}</label>
+    </div>
+    <div class="card-footer">
+      <div class="justify-content-center">
+        <button
+          type="button"
+          class="btn"
+          :class="eTemaEscuro ? 'btn-outline-light' : 'btn-success'"
+          @click="cronometrar()"
+        >
+          {{ textoBotao }}
+        </button>
+      </div>
+    </div>
+
+    <lista-tarefas
+      class="list-group list-group-flush rounded"
+      :class="[{ 'bg-secondary': eTemaEscuro }, { 'text-white': eTemaEscuro }]"
+    />
+  </div>
+</template>
+
+<script>
+import ListaTarefas from "./Lista-tarefas.vue";
+import Alarme from "../assets/sounds/alarm.mp3";
+
+export default {
+  components: { ListaTarefas },
+  name: "Pomodoro",
+
+  data() {
+    const pomodoroTempo = 25 * 60;
+    const pausaCurta = 5 * 60;
+    const pausaLonga = 15 * 60;
+    const somAlarme = new Audio(Alarme);
+
+    return {
+      pomodoroTempo,
+      pausaCurta,
+      pausaLonga,
+      tempoAtual: pomodoroTempo,
+      textoBotao: "Começar!",
+      intervalo: null,
+      contagemPomodoros: 0,
+      alarme: somAlarme,
+    };
+  },
+  methods: {
+    tempoDePomodoro() {
+      clearInterval(this.intervalo);
+      this.tempoAtual = this.pomodoroTempo;
+      this.textoBotao = "Começar!";
+    },
+    tempoDePausaCurta() {
+      clearInterval(this.intervalo);
+      this.tempoAtual = this.pausaCurta;
+      this.textoBotao = "Começar!";
+    },
+    tempoDePausaLonga() {
+      clearInterval(this.intervalo);
+      this.tempoAtual = this.pausaLonga;
+      this.textoBotao = "Começar!";
+    },
+    cronometrar() {
+      if (this.textoBotao === "Começar!" || this.textoBotao === "Recomeçar") {
+        this.reducaoDoTempo();
+        this.textoBotao = "Pausa";
+      } else if (this.textoBotao === "Pausa") {
+        this.paradaDoTempo();
+        this.textoBotao = "Recomeçar";
+      }
+    },
+    reducaoDoTempo() {
+      this.intervalo = setInterval(() => {
+        if (this.tempoAtual > 0) {
+          this.tempoAtual -= 1;
+        }
+      }, 1000);
+    },
+    paradaDoTempo() {
+      clearInterval(this.intervalo);
+    },
+    concluido() {
+      if (this.tempoAtual <= 0) {
+        // Clear interval
+        clearInterval(this.intervalo);
+
+        if (this.contagemPomodoros >= 4) {
+          this.tempoAtual = this.pausaLonga;
+          this.contagemPomodoros = 0;
+        } else {
+          this.tempoAtual = this.pausaCurta;
+          this.contagemPomodoros++;
+        }
+
+        this.alarme.play();
+
+        // Immediately disable button and set state
+        this.textoBotao = "Começar!";
+      }
+    },
+  },
+  computed: {
+    relogio() {
+      const minutos = String(parseInt(this.tempoAtual / 60));
+      const segundos = String(parseInt(this.tempoAtual % 60));
+      const minutosRestantes = ("0" + minutos).slice(-2);
+      const segundosRestantes = ("0" + segundos).slice(-2);
+
+      if (minutosRestantes <= 0 && segundosRestantes <= 0) this.concluido();
+
+      return `${minutosRestantes}:${segundosRestantes}`;
+    },
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
