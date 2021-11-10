@@ -1,5 +1,6 @@
 {
-  "name": "pomodoro-cliente",
+  "name": "cliente",
+  "description": "Lado cliente de uma aplicação Vue/Flask.",
   "version": "0.1.0",
   "private": true,
   "scripts": {

@@ -1,5 +1,8 @@
 <template>
-  <div class="form-check form-switch">
+  <div id="App">
+    <router-view></router-view>
+  </div>
+  <!-- <div class="form-check form-switch">
     <label>{{ textoTemaEscuro }}</label>
     <input
       class="form-check-input"
@@ -10,11 +13,11 @@
       @click="mudarTema()"
     />
     <Pomodoro class="container" />
-  </div>
+  </div> -->
 </template>
 
 <script>
-import Pomodoro from "./components/Pomodoro.vue";
+// import Pomodoro from "./components/Pomodoro.vue";
 
 export default {
   name: "App",
@@ -34,7 +37,7 @@ export default {
     },
   },
   components: {
-    Pomodoro,
+    // Pomodoro,
   },
 };
 </script>
