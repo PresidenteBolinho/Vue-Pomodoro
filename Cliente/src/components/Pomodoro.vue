@@ -1,62 +1,52 @@
 <template>
-  <div
-    class="card"
-    :class="[{ 'text-white': eTemaEscuro, 'bg-secondary': eTemaEscuro }]"
-  >
-    <div class="card-header">
-      <div
-        class="btn-toolbar justify-content-center"
-        role="toolbar"
-        aria-label="Toolbar with button groups"
-      >
-        <button
-          type="button"
-          class="btn"
-          :class="eTemaEscuro ? 'btn-outline-light' : 'btn-primary'"
-          @click="tempoDePomodoro()"
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <div
+          class="btn-toolbar justify-content-center"
+          role="toolbar"
+          aria-label="Toolbar with button groups"
         >
-          Pomodoro
-        </button>
-        <button
-          type="button"
-          class="btn"
-          :class="eTemaEscuro ? 'btn-outline-light' : 'btn-primary'"
-          @click="tempoDePausaCurta()"
-        >
-          Pausa curta
-        </button>
-        <button
-          type="button"
-          class="btn"
-          :class="eTemaEscuro ? 'btn-outline-light' : 'btn-primary'"
-          @click="tempoDePausaLonga()"
-        >
-          Pausa longa
-        </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="tempoDePomodoro()"
+          >
+            Pomodoro
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="tempoDePausaCurta()"
+          >
+            Pausa curta
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="tempoDePausaLonga()"
+          >
+            Pausa longa
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="justify-content-center">
+          <label id="relogio" class="row justify-content-center">{{
+            relogio
+          }}</label>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row justify-content-center">
+          <button type="button" class="btn btn-success" @click="cronometrar()">
+            {{ textoBotao }}
+          </button>
+        </div>
       </div>
     </div>
-    <div class="card-body">
-      <label id="relogio" class="row justify-content-center">{{
-        relogio
-      }}</label>
-    </div>
-    <div class="card-footer">
-      <div class="justify-content-center">
-        <button
-          type="button"
-          class="btn"
-          :class="eTemaEscuro ? 'btn-outline-light' : 'btn-success'"
-          @click="cronometrar()"
-        >
-          {{ textoBotao }}
-        </button>
-      </div>
-    </div>
-
-    <lista-tarefas
-      class="list-group list-group-flush rounded"
-      :class="[{ 'bg-secondary': eTemaEscuro }, { 'text-white': eTemaEscuro }]"
-    />
+    <br />
+    <lista-tarefas />
   </div>
 </template>
 
@@ -155,20 +145,25 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+label {
+  font-family: "Inter", sans-serif;
+  color: #2c3e50;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+#relogio {
+  font-size: 88px;
 }
+
 li {
-  display: inline-block;
-  margin: 0 10px;
+  list-style-type: none;
 }
-a {
-  color: #42b983;
+
+button {
+  font-size: 18px;
+  margin: 1px;
 }
 </style>

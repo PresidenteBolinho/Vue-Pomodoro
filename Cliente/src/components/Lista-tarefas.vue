@@ -1,28 +1,15 @@
 <template>
-  <div
-    class="container rounded justify-content-center"
-    :class="[{ 'bg-secondary': eTemaEscuro, 'text-white': eTemaEscuro }]"
-  >
-    <form
-      v-on:submit.prevent="adicionarTarefa()"
-      class="justify-content-center"
-    >
-      <label for="nova-tarefa" class="col-md-3">Adicionar tarefa: </label>
+  <div>
+    <form v-on:submit.prevent="adicionarTarefa()">
+      <label for="nova-tarefa">Adicionar tarefa: </label>
       <input
         v-model="novoTextoTarefa"
         id="nova-tarefa"
         placeholder="Ex.: Fazer o almoço"
-        class="col-md-6 rounded"
         style="margin-right: 10px"
       />
-      <button
-        class="btn col-md-2"
-        :class="eTemaEscuro ? 'btn-outline-light' : 'btn-primary'"
-      >
-        Adicionar
-      </button>
+      <button>Adicionar</button>
     </form>
-    <hr />
     <item-tarefas
       v-for="(tarefa, index) in tarefas"
       :key="tarefa.id"
@@ -41,7 +28,10 @@ export default {
 
   data() {
     return {
-      tarefas: [],
+      tarefas: [{
+        id: 1,
+        title: 'teste'
+      }],
       novoTextoTarefa: "",
       IdTarefa: 1,
     };
@@ -59,6 +49,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

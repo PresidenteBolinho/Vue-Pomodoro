@@ -14,7 +14,3 @@ export default {
     emit: ['remove']
 }
 </script>
-
-<style>
-
-</style>
