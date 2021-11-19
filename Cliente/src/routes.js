@@ -2,6 +2,6 @@ export default {
     '/': 'Home',
     '/sobre': 'Sobre',
     '/autenticacao': 'Autenticacao',
-    '/app': 'App',
+    '/index': 'Index',
     '/ping': 'Ping',
 }
