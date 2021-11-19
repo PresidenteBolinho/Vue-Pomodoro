@@ -147,13 +147,6 @@ export default {
 
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
-
-label {
-  font-family: "Inter", sans-serif;
-  color: #2c3e50;
-}
-
 #relogio {
   font-size: 88px;
 }
