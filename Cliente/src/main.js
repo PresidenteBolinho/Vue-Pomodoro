@@ -1,5 +1,6 @@
 import { createApp, h } from 'vue'
 import routes from './routes'
+import store from './store/store'
 import './axios'
 
 const SimpleRouterApp = {
@@ -22,4 +23,4 @@ const SimpleRouterApp = {
     }
 }
 
-createApp(SimpleRouterApp).mount('#app')
+createApp(SimpleRouterApp).use(store).mount('#app')
