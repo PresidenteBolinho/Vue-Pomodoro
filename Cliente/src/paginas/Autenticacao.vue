@@ -23,6 +23,7 @@ import Login from "../components/Login.vue";
 import Cadastro from "../components/Cadastro.vue";
 
 export default {
+  name: 'Autenticacao',
   components: {
     MainLayout,
     Login,

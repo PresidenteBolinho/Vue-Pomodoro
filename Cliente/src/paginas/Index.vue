@@ -10,6 +10,7 @@ import Pomodoro from '../components/Pomodoro.vue'
 import axios from 'axios'
 
 export default {
+    name: 'Sobre',
     components: {
         MainLayout,
         Pomodoro
@@ -21,7 +22,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

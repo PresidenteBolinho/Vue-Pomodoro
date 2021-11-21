@@ -30,6 +30,7 @@
 import MainLayout from '../layouts/Main.vue';
 
 export default {
+    name: 'Sobre',
     components: {
         MainLayout
     }
