@@ -16,6 +16,14 @@ const store = createStore({
         getModo(state) {
             return state.style.modo
         }
+    },
+    mutations: {
+        mudancaModo(state, payload) {
+            state.style.modo = payload
+        },
+        novaMsg(state, payload) {
+            state.msg = payload
+        }
     }
 })
 
