@@ -1,9 +1,6 @@
-from flask import Flask, jsonify, request, redirect, url_for
-from flask_cors import CORS
 from app import app
-
-#configuração da aplicação
-DEBUG = True
+from flask import jsonify, request, redirect
+from flask_cors import CORS
 
 
 CORS(app, resource={r'/*': {'origins': '*'}})
@@ -22,7 +19,7 @@ TAREFAS = []
 
 
 #Rota raiz
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return "<h1>Index</h1>"
 
@@ -33,11 +30,15 @@ def ping_pong():
 
 
 #Autenticação
-@app.route('/acesso', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def acesso():
-    post_data = request.get_json()
-    return jsonify(post_data)
+    response_object = {'status': 'success'}
 
+    if request.method == 'POST':
+        post_data = request.get_json()
+        post_data['usuario'] in USUARIOS
+
+    return jsonify(response_object)
 
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
@@ -58,7 +59,3 @@ def registro():
         response_object['usuarios'] = USUARIOS
 
     return jsonify(response_object)
-
-
-if __name__ == '__main__':
-    app.run()
